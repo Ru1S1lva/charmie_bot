@@ -25,7 +25,8 @@
     <joint name="chassi_joint" type="fixed">
         <parent link="base_link"/>
         <child link="chassi_link"/>
-        <origin xyz="0 0 0"/>
+        <origin xyz="0 0 0"/> <!--VIRADO PARA X-->
+        <!--<origin xyz="0 0 0" rpy="0 0 ${pi/2}"/> VIRADO PARA Y-->
     </joint>
 
     <link name="chassi_link">
