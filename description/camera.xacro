@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <joint name="camera_joint" type="fixed">
+    <joint name="camera_joint" type="revolute">
         <parent link="body_link"/>
         <child link="camera_link"/>
-        <origin xyz="0.05 0 1.1" rpy="0 0.261 0"/>
+        <origin xyz="0.05 0 1.1" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+        <limit effort="1000.0" lower="0.0" upper="0.548" velocity="0.5"/>
     </joint>
 
     <link name="camera_link">
@@ -14,6 +16,9 @@
             </geometry>
             <material name="red"/>
         </visual>
+        <xacro:inertial_box mass="0.1" x="0.04" y="0.07" z="0.04">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_box>
     </link>
 
     <joint name="camera_optical_joint" type="fixed">
