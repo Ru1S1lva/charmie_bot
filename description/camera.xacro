@@ -1,12 +1,50 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <joint name="camera_joint" type="revolute">
+    <joint name="neck_joint" type="fixed">
         <parent link="body_link"/>
-        <child link="camera_link"/>
+        <child link="neck_link"/>
         <origin xyz="0.045 0 1.12" rpy="0 0 0"/>
+    </joint>
+
+    <link name="neck_link">
+        <xacro:inertial_box mass="0.1" x="0" y="0" z="0">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+
+    <joint name="camera_joint_z" type="revolute">
+        <parent link="neck_link"/>
+        <child link="camera_link_z"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <axis xyz="0 1 0"/>
         <limit effort="1000.0" lower="0.0" upper="0.548" velocity="0.5"/>
+    </joint>
+
+    <link name="camera_link_z">
+        <xacro:inertial_box mass="0.1" x="0" y="0" z="0">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+
+    <joint name="camera_joint_y" type="revolute">
+        <parent link="camera_link_z"/>
+        <child link="camera_link_y"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1000.0" lower="-0.548" upper="0.548" velocity="0.5"/>
+    </joint>
+
+    <link name="camera_link_y">
+        <xacro:inertial_box mass="0.1" x="0" y="0" z="0">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+    
+    <joint name="camera_joint" type="fixed">
+        <parent link="camera_link_y"/>
+        <child link="camera_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
     </joint>
 
     <link name="camera_link">
