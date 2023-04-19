@@ -3,7 +3,7 @@
 
     <!--3 juntas ombro + 2 juntas cotovelo + 2 mao + 1 garra __ 7DOF-->
 
-    <!--OMBRO ATE COTOVELO--> 
+    <!--SHOULDER-ELBOW--> 
      
     <joint name="left_shoulder_joint" type="fixed">
         <parent link="body_link"/>
@@ -74,15 +74,15 @@
         <material>Gazebo/Blue</material>
     </gazebo>
 
-    <!--LIGAÇAO SHOULDER-ARM--> 
+    <!--LIGAÇAO ELBOW--> 
 
     <joint name="shoulder_arm_joint" type="fixed">
         <parent link="left_shoulder_link"/>
-        <child link="left_SA_link"/>
+        <child link="left_SE_link"/>
         <origin xyz="0 0 -0.2" rpy="0 0 0"/>
     </joint>
 
-    <link name="left_SA_link">
+    <link name="left_SE_link">
         <visual>
             <geometry>
                 <sphere radius="0.01"/>
@@ -99,59 +99,59 @@
         </xacro:inertial_sphere>
     </link>
 
-    <gazebo reference="left_SA_link">
+    <gazebo reference="left_SE_link">
         <material>Gazebo/Red</material>
     </gazebo>
 
-    <!--COTOVELO ATE PULSO--> 
+    <!--ELBOW-WRIST--> 
 
-    <joint name="left_arm_joint" type="fixed">
-        <parent link="left_SA_link"/>
-        <child link="left_arm_aux_link"/>
+    <joint name="left_elbow_joint" type="fixed">
+        <parent link="left_SE_link"/>
+        <child link="left_elbow_aux_link"/>
         <origin xyz="0 0 -0.04" rpy="0 0 0"/>
     </joint>
 
-    <link name="left_arm_aux_link">
+    <link name="left_elbow_aux_link">
         <xacro:inertial_box mass="0.1" x="0" y="0" z="0">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_box>
     </link>
 
-    <joint name="left_arm_joint_z" type="revolute">
-        <parent link="left_arm_aux_link"/>
-        <child link="left_arm_link_z"/>
+    <joint name="left_elbow_joint_z" type="revolute">
+        <parent link="left_elbow_aux_link"/>
+        <child link="left_elbow_link_z"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <axis xyz="0 0 -1"/>
-        <limit effort="1000.0" lower="0" upper="1.5708" velocity="0.5"/>
+        <limit effort="1000.0" lower="0" upper="1.445" velocity="0.5"/>
     </joint>
 
-    <link name="left_arm_link_z">
+    <link name="left_elbow_link_z">
         <xacro:inertial_box mass="0.1" x="0" y="0" z="0">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_box>
     </link>
 
-    <joint name="left_arm_joint_x" type="revolute">
-        <parent link="left_arm_link_z"/>
-        <child link="left_arm_link_x"/>
+    <joint name="left_elbow_joint_x" type="revolute">
+        <parent link="left_elbow_link_z"/>
+        <child link="left_elbow_link_x"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <axis xyz="0 -1 0"/>
-        <limit effort="1000.0" lower="0" upper="0.785" velocity="0.5"/>
+        <limit effort="1000.0" lower="0" upper="2.225" velocity="0.5"/>
     </joint>
 
-    <link name="left_arm_link_x">
+    <link name="left_elbow_link_x">
         <xacro:inertial_box mass="0.1" x="0" y="0" z="0">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_box>
     </link>
     
-    <joint name="left_arm_final_joint" type="fixed">
-        <parent link="left_arm_link_x"/>
-        <child link="left_arm_link"/>
+    <joint name="left_elbow_final_joint" type="fixed">
+        <parent link="left_elbow_link_x"/>
+        <child link="left_elbow_link"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
     </joint>
 
-    <link name="left_arm_link">
+    <link name="left_elbow_link">
         <visual>
             <origin xyz="0 0 -0.08" rpy="0 0 ${pi/2}"/>
             <geometry>
@@ -170,19 +170,19 @@
         </xacro:inertial_box>
     </link>
 
-    <gazebo reference="left_arm_link">
+    <gazebo reference="left_elbow_link">
         <material>Gazebo/Blue</material>
     </gazebo>
 
-    <!--LIGAÇAO ARM-HAND--> 
+    <!--LIGAÇAO WRIST-HAND--> 
 
-    <joint name="left_AH_joint" type="fixed">
-        <parent link="left_arm_link"/>
-        <child link="left_AH_link"/>
+    <joint name="left_WH_joint" type="fixed">
+        <parent link="left_elbow_link"/>
+        <child link="left_WH_link"/>
         <origin xyz="0 0 -0.2" rpy="0 0 0"/>
     </joint>
 
-    <link name="left_AH_link">
+    <link name="left_WH_link">
         <visual>
             <geometry>
                 <sphere radius="0.01"/>
@@ -199,16 +199,16 @@
         </xacro:inertial_sphere>
     </link>
 
-    <gazebo reference="left_AH_link">
+    <gazebo reference="left_WH_link">
         <material>Gazebo/Red</material>
     </gazebo>
 
     <!--HAND-->
 
     <joint name="left_hand_joint" type="fixed">
-        <parent link="left_AH_link"/>
+        <parent link="left_WH_link"/>
         <child link="left_hand_aux_link"/>
-        <origin xyz="0 0 -0.02" rpy="0 0 0"/>
+        <origin xyz="0 0 -0.03" rpy="0 0 0"/>
     </joint>
 
     <link name="left_hand_aux_link">
@@ -222,7 +222,7 @@
         <child link="left_hand_link_z"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <axis xyz="0 0 -1"/>
-        <limit effort="1000.0" lower="0" upper="0.785" velocity="0.5"/>
+        <limit effort="1000.0" lower="-0.785" upper="0.785" velocity="0.5"/>
     </joint>
 
     <link name="left_hand_link_z">
@@ -236,7 +236,7 @@
         <child link="left_hand_link_x"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <axis xyz="0 -1 0"/>
-        <limit effort="1000.0" lower="0" upper="0.785" velocity="0.5"/>
+        <limit effort="1000.0" lower="-0.785" upper="0.785" velocity="0.5"/>
     </joint>
 
     <link name="left_hand_link_x">
@@ -247,31 +247,62 @@
     
     <joint name="left_hand_final_joint" type="fixed">
         <parent link="left_hand_link_x"/>
-        <child link="left_hand_link"/>
+        <child link="L_hand_base_link"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
-    </joint>
+    </joint>    
 
-    <link name="left_hand_link">
+    <link name="L_hand_base_link">
         <visual>
-            <origin xyz="0 0 0" rpy="0 0 ${pi/2}"/>
             <geometry>
-                <box size="0.08 0.05 0.02"/>
+                <box size="0.02 0.08 0.02"/>
             </geometry>
-            <material name="blue"/>
+            <material name="red"/>
         </visual>
         <collision>
-            <origin xyz="0 0 0" rpy="0 0 ${pi/2}"/>
             <geometry>
-                <box size="0.08 0.05 0.02"/>
+                <box size="0.02 0.08 0.02"/>
             </geometry>
         </collision>
-        <xacro:inertial_box mass="0.1" x="0.08" y="0.05" z="0.02">
+        <xacro:inertial_box mass="0.1" x="0.02" y="0.08" z="0.02">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_box>
     </link>
 
-    <gazebo reference="left_hand_link">
-        <material>Gazebo/Blue</material>
-    </gazebo>
-           
+    <!--GRIPPER-->
+
+    <joint name="L_left_gripper_slide_joint" type="prismatic">
+        <parent link="L_hand_base_link"/>
+        <child link="L_left_gripper_link"/>
+        <origin xyz="0 0.032 -0.035"/>
+        <axis xyz="0 -1 0"/>
+        <limit effort="10.0" lower="0" upper="0.015" velocity="0.1"/>
+    </joint>
+
+    <link name="L_left_gripper_link">
+        <visual>
+        <geometry>
+            <box size="0.015 0.015 0.05"/>
+        </geometry>
+        <material name="blue"/>
+        </visual>
+    </link>
+
+    <joint name="L_right_gripper_slide_joint" type="prismatic">
+        <parent link="L_hand_base_link"/>
+        <child link="L_right_gripper_link"/>
+        <origin xyz="0 -0.032 -0.035"/>
+        <axis xyz="0 1 0"/>
+        <limit effort="10.0" lower="0" upper="0.015" velocity="0.1"/>
+    </joint>
+
+    <link name="L_right_gripper_link">
+        <visual>
+        <geometry>
+            <box size="0.015 0.015 0.05"/>
+        </geometry>
+        <material name="black"/>
+        </visual>
+    </link>
+
+          
 </robot>
