@@ -4,7 +4,8 @@
     <xacro:macro name="omni_steering" params="">
         <gazebo>
             <plugin name="omni_steering" filename="libgazebo_ros_planar_move.so">
-                <odometry_rate>50.0</odometry_rate>                
+                <commandTopic>cmd_vel</commandTopic>
+                <odometry_rate>100.0</odometry_rate>                
                 <odometry_frame>odom</odometry_frame>
                 <robot_base_frame>base_link</robot_base_frame>
 
@@ -12,6 +13,7 @@
                 <publish_odom_tf>true</publish_odom_tf>
                 <publish_wheel_tf>true</publish_wheel_tf>
             </plugin>
+
         </gazebo>
   </xacro:macro>
 

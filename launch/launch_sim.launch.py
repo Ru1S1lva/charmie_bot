@@ -16,7 +16,7 @@ def generate_launch_description():
     rsp = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory(package_name),'launch','rsp.launch.py'
-                )]), launch_arguments={'use_sim_time': 'true', 'use_ros2_control': 'true'}.items()
+                )]), launch_arguments={'use_sim_time': 'true'}.items()
     )
 
      # Include the Gazebo launch file, provided by the gazebo_ros package
@@ -26,14 +26,21 @@ def generate_launch_description():
             )
 
     # Run the spawner node from the gazebo_ros package. The entity name doesn't really matter if you only have a single robot.
-    spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
-                        arguments=['-topic', 'robot_description',
-                                   '-entity', 'my_bot'],
+    spawn_entity = Node(package='gazebo_ros', 
+                        executable='spawn_entity.py',
+                        arguments=['-topic', 'robot_description','-entity', 'my_bot'],
                         output='screen')
+    
+    joint_state = Node(package='joint_state_publisher',
+                       executable='joint_state_publisher',
+                       name='joint_state_publisher',
+                       output='screen',
+                       parameters=[{'use_sim_time': True}])
     
     # Launch them all!
     return LaunchDescription([
         rsp,
         gazebo,
-        spawn_entity
+        spawn_entity,
+        joint_state
     ])
