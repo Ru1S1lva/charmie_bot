@@ -1,7 +1,22 @@
-## Robot Package Template
+## CHARMIE SIMULATOR
 
-This is a GitHub template. You can make your own copy by clicking the green "Use this template" button.
+passos iniciais em cada tab do terminal:
+cd charmie_ws/
+source install/setup.bash
 
-It is recommended that you keep the repo/package name the same, but if you do change it, ensure you do a "Find all" using your IDE (or the built-in GitHub IDE by hitting the `.` key) and rename all instances of `charmie_bot` to whatever your project's name is.
+para usar joystick:
+- conectar primeiro joystick via bluetooth ao pc
+ros2 launch charmie_bot joystick.launch.py
 
-Note that each directory currently has at least one file in it to ensure that git tracks the files (and, consequently, that a fresh clone has direcctories present for CMake to find). These example files can be removed if required (and the directories can be removed if `CMakeLists.txt` is adjusted accordingly).
+iniciar ambiente gazebo:
+ambiente com robo - ros2 launch charmie_bot launch_sim.launch.py
+ambiente com robo e robocup world - ros2 launch charmie_bot launch_sim.launch.py world:=./src/charmie_bot/worlds/robocup_house.world
+
+iniciar rviz com robo:
+rviz2 -d src/charmie_bot/config/main.rviz
+
+iniciar slam_toolbox:
+ros2 launch slam_toolbox online_async_launch.py params_file:=./src/charmie_bot/config/mapper_params_online_async.yaml use_sim_time:=true
+
+iniciar nav2 (para usar Goal Pose):
+ros2 launch nav2_bringup navigation_launch.py use_sim_time:=true
