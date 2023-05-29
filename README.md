@@ -1,4 +1,5 @@
 ##CHARMIE SIMULATOR
+
 passos iniciais em cada tab do terminal:
 
 cd charmie_ws/
