@@ -95,11 +95,10 @@
     <!--WHEELS-->
 
     <!--LEFT FRONT-->
-    <joint name="left_front_joint" type="continuous">
+    <joint name="left_front_joint" type="fixed">
         <parent link="chassi_link"/>
         <child link="left_front_link"/>
         <origin xyz="0.2 0.2 0" rpy="-${pi/2} 0 -${pi/4}"/>
-        <axis xyz="0 0 1"/>
     </joint>
 
     <link name="left_front_link">
@@ -126,11 +125,10 @@
     </gazebo>
 
     <!--LEFT BACK-->
-    <joint name="left_back_joint" type="continuous">
+    <joint name="left_back_joint" type="fixed">
         <parent link="chassi_link"/>
         <child link="left_back_link"/>
         <origin xyz="-0.2 0.2 0" rpy="0 -${pi/2} -${pi/4}"/>
-        <axis xyz="0 0 1"/>
     </joint>
 
     <link name="left_back_link">
@@ -157,11 +155,10 @@
     </gazebo>
 
     <!--RIGHT FRONT-->
-    <joint name="right_front_joint" type="continuous">
+    <joint name="right_front_joint" type="fixed">
         <parent link="chassi_link"/>
         <child link="right_front_link"/>
         <origin xyz="0.2 -0.2 0" rpy="0 ${pi/2} -${pi/4}"/>
-        <axis xyz="0 0 -1"/>
     </joint>
 
     <link name="right_front_link">
@@ -188,11 +185,10 @@
     </gazebo>
 
     <!--RIGHT BACK-->
-    <joint name="right_back_joint" type="continuous">
+    <joint name="right_back_joint" type="fixed">
         <parent link="chassi_link"/>
         <child link="right_back_link"/>
         <origin xyz="-0.2 -0.2 0" rpy="${pi/2} 0 -${pi/4}"/>
-        <axis xyz="0 0 -1"/>
     </joint>
 
     <link name="right_back_link">
