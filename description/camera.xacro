@@ -2,9 +2,9 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <joint name="neck_joint" type="fixed">
-        <parent link="body_link"/>
+        <parent link="upper_body_link"/>
         <child link="neck_link"/>
-        <origin xyz="0.045 0 1.12" rpy="0 0 0"/>
+        <origin xyz="0.045 0 0.5" rpy="0 0 0"/>
     </joint>
 
     <link name="neck_link">

@@ -13,8 +13,13 @@
                 <publish_odom_tf>true</publish_odom_tf>
                 <publish_wheel_tf>true</publish_wheel_tf>
             </plugin>
-
         </gazebo>
-  </xacro:macro>
+    </xacro:macro>
+
+    <!-- <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>robot</robotNamespace>
+        </plugin>
+    </gazebo> -->
 
 </robot> 
