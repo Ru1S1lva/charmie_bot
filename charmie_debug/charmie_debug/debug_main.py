@@ -16,15 +16,15 @@ class MinimalPublisher(Node):
     def send_goal(self, angle):
         goal_msg = FollowJointTrajectory.Goal()
 
-        joint_names = ['camera_joint_z', 'lower_body_joint']
+        joint_names = ['upper_body_joint', 'lower_body_joint', 'camera_joint_y', 'camera_joint_z']
 
         points = []
         point1 = JointTrajectoryPoint()
-        point1.positions = [0.0, 0.0] #start point
+        point1.positions = [0.1745, 0.0, 0.0, 0.0] #start point
 
         point2 = JointTrajectoryPoint()
         point2.time_from_start = Duration(seconds=1, nanoseconds=0).to_msg()
-        point2.positions = [angle+0.25, angle] #finish point
+        point2.positions = [angle+0.5, angle, angle, angle] #finish point
 
         points.append(point1)
         points.append(point2)
@@ -34,7 +34,8 @@ class MinimalPublisher(Node):
         goal_msg.trajectory.points = points
 
         self._action_client.wait_for_server()
-        self._send_goal_future = self._action_client.send_goal_async(goal_msg, feedback_callback=self.goal_response_callback)
+        self._send_goal_future = self._action_client.send_goal_async(goal_msg, feedback_callback=self.feedback_callback)
+        self._send_goal_future.add_done_callback(self.goal_response_callback)
 
     def goal_response_callback(self, future):
         goal_handle = future.result()
@@ -50,7 +51,7 @@ class MinimalPublisher(Node):
     def get_result_callback(self, future):
         result = future.result().result
         self.get_logger().info('Result: ' + str(result))
-        rclpy.shutdown()
+        #rclpy.shutdown()
 
     def feedback_callback(self, feedback_msg):
         feedback = feedback_msg.feedback
@@ -60,7 +61,7 @@ def main(args=None):
 
     minimal_publisher = MinimalPublisher()
     
-    minimal_publisher.send_goal(0.14)
+    minimal_publisher.send_goal(0.0)
     
     rclpy.spin(minimal_publisher)
 

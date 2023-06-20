@@ -60,6 +60,6 @@ def generate_launch_description():
         rsp,
         gazebo,
         spawn_entity,
-        joint_state_broadcaster_spawner,
-        joint_state
+        joint_state,
+        joint_state_broadcaster_spawner
     ])

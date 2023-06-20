@@ -10,7 +10,9 @@ controller_manager:
 joint_trajectory_controller:
   ros__parameters:
     joints:
+      - camera_joint_y
       - camera_joint_z
+      - upper_body_joint
       - lower_body_joint
     interface_name: position
     command_interfaces:
